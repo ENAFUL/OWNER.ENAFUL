@@ -1,0 +1,15 @@
+:root { --neon-color: #00ffcc; }
+body { background: #050505; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+
+.clock-face {
+    width: 350px; height: 350px; border-radius: 50%;
+    border: 8px solid #222; box-shadow: 0 0 50px var(--neon-color);
+    position: relative; display: flex; justify-content: center;
+}
+
+.hand { position: absolute; bottom: 50%; width: 6px; background: var(--neon-color); transform-origin: bottom; border-radius: 10px; }
+.hour { height: 80px; }
+.minute { height: 120px; width: 4px; }
+.second { height: 150px; width: 2px; background: #ff0055; }
+
+#digital-clock { color: white; font-size: 2rem; margin-top: 20px; text-shadow: 0 0 10px var(--neon-color); }
