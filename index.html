@@ -1,10 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>OWNER ENAFUL - Advanced Clock</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root { --primary-color: #00ffcc; --bg-color: #050505; --text-color: #ffffff; }
+        body { background: var(--bg-color); color: var(--text-color); display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: 'Segoe UI', sans-serif; margin: 0; }
+        .owner-enafal-container { text-align: center; }
+        .brand-name { color: var(--primary-color); text-transform: uppercase; letter-spacing: 5px; margin-bottom: 20px; }
+        
+        .clock-face {
+            width: 300px; height: 300px; border-radius: 50%;
+            border: 8px solid #222; box-shadow: 0 0 50px var(--primary-color);
+            position: relative; display: flex; justify-content: center;
+        }
+        
+        .hand { position: absolute; bottom: 50%; width: 6px; background: var(--primary-color); transform-origin: bottom; border-radius: 10px; transition: transform 0.05s cubic-bezier(0.4, 2.3, 0.3, 1); }
+        .hour { height: 70px; width: 6px; }
+        .minute { height: 100px; width: 4px; }
+        .second { height: 130px; width: 2px; background: #ff0055; }
+
+        #digital-clock { font-size: 1.5rem; margin-top: 30px; text-shadow: 0 0 10px var(--primary-color); }
+        button { margin-top: 15px; padding: 10px 20px; cursor: pointer; background: var(--primary-color); border: none; border-radius: 5px; font-weight: bold; }
+    </style>
 </head>
 <body>
+
     <div class="owner-enafal-container">
         <h1 class="brand-name">OWNER ENAFUL</h1>
         <div class="clock-face">
@@ -13,8 +34,34 @@
             <div class="hand second" id="sc"></div>
         </div>
         <div id="digital-clock">00:00:00</div>
-        <button id="mode-switch">Toggle Dark/Light</button>
+        <button id="mode-switch">Toggle Theme</button>
     </div>
-    <script src="script.js"></script>
+
+    <script>
+        const hr = document.querySelector("#hr");
+        const mn = document.querySelector("#mn");
+        const sc = document.querySelector("#sc");
+        const digital = document.querySelector("#digital-clock");
+
+        function updateTime() {
+            let day = new Date();
+            let hh = day.getHours() * 30;
+            let mm = day.getMinutes() * 6;
+            let ss = day.getSeconds() * 6;
+
+            hr.style.transform = `rotateZ(${(hh)+(mm/12)}deg)`;
+            mn.style.transform = `rotateZ(${mm}deg)`;
+            sc.style.transform = `rotateZ(${ss}deg)`;
+            digital.innerHTML = `OWNER ENAFUL: ${day.toLocaleTimeString()}`;
+        }
+
+        document.getElementById('mode-switch').addEventListener('click', () => {
+            document.body.style.background = document.body.style.background === 'white' ? '#050505' : 'white';
+            document.body.style.color = document.body.style.color === 'black' ? 'white' : 'black';
+        });
+
+        setInterval(updateTime, 1000);
+        updateTime();
+    </script>
 </body>
 </html>
