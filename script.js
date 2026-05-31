@@ -1,18 +1,21 @@
-const deg = 6;
-const hr = document.querySelector("#hr");
-const mn = document.querySelector("#mn");
-const sc = document.querySelector("#sc");
-const digital = document.querySelector("#digital-clock");
+:root { --primary-color: #00ffcc; }
+body { background: #050505; color: white; display: flex; justify-content: center; align-items: center; min-height: 100vh; font-family: sans-serif; }
 
-setInterval(() => {
-    let day = new Date();
-    let hh = day.getHours() * 30;
-    let mm = day.getMinutes() * deg;
-    let ss = day.getSeconds() * deg;
+.brand-name { color: var(--primary-color); text-transform: uppercase; letter-spacing: 5px; margin-bottom: 20px; }
 
-    hr.style.transform = `rotateZ(${(hh)+(mm/12)}deg)`;
-    mn.style.transform = `rotateZ(${mm}deg)`;
-    sc.style.transform = `rotateZ(${ss}deg)`;
+.clock-face {
+    width: 350px; height: 350px; border-radius: 50%;
+    border: 8px solid #222; box-shadow: 0 0 50px var(--primary-color);
+    position: relative; display: flex; justify-content: center;
+}
 
-    digital.innerHTML = day.toLocaleTimeString();
-}, 1000);
+.hand { 
+    position: absolute; bottom: 50%; width: 6px; background: var(--primary-color); 
+    transform-origin: bottom; border-radius: 10px; 
+    transition: transform 0.05s cubic-bezier(0.4, 2.3, 0.3, 1); /* স্মুথ মোশন */
+}
+.hour { height: 80px; }
+.minute { height: 120px; width: 4px; }
+.second { height: 150px; width: 2px; background: #ff0055; }
+
+#digital-clock { font-size: 2rem; margin-top: 30px; text-shadow: 0 0 10px var(--primary-color); }
